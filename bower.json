@@ -1,0 +1,20 @@
+{
+  "name": "my-account",
+  "authors": [
+    "EricDosReis <ericdosreis.personal@gmail.com>"
+  ],
+  "description": "Minha conta, aplicação para gerenciar meus ganhos e custos.",
+  "main": "index.html",
+  "keywords": [
+    "angularJS",
+    "s2 it",
+    "front-end"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "angular": "^1.5.7",
+    "angular-locale-pt-br": "^1.3.15"
+  }
+}
