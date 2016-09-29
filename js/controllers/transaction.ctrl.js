@@ -5,24 +5,29 @@
 		.module('MyCash')
 		.controller('TranscationCtrl', TranscationCtrl);
 
-	function TranscationCtrl() {
+	TranscationCtrl.$inject = ['$http', 'config'];
+
+	function TranscationCtrl($http, config) {
 
 		var vm = this;
 
-		vm.transaction      = {};
-		vm.transaction.type = 'Saque';
+		getTransactions();
 
-		vm.transactions = getTransactions();
+		init();
 
 		vm.saveTransaction = function(transaction) {
-			vm.transactions.push(transaction);
+			vm.transactions.push(angular.copy(transaction));
+
+			init();
+			vm.balance = calculateBalance(vm.transactions);
 		};
 
 		vm.deleteTransaction = function(transaction) {
 			var index = vm.transactions.indexOf(transaction);
+			vm.transactions.splice(index, 1);
 
-			if (index > -1)
-				vm.transactions.splice(index, 1);
+			init();
+			vm.balance = calculateBalance(vm.transactions);
 		};
 
 		vm.orderBy = function(orderCriteria) {
@@ -30,8 +35,32 @@
 			vm.orderDirection = !vm.orderDirection;
 		};
 
+		function init() {
+			vm.transaction      = {};
+			vm.transaction.type = 'Saque';
+		}
+
+		function calculateBalance(transactions) {
+			var balance = 0;
+
+			transactions.forEach((item) => {
+				if (item.type === 'Saque')
+					balance -= item.value;
+
+				else
+					balance += item.value;
+			});
+
+			return balance;
+		}
+
 		function getTransactions() {
-			return [];
+			$http.get(config.API_URL + '/mocks/transactions.json')
+				.success(function(response) {
+
+					vm.transactions = response;
+					vm.balance = calculateBalance(vm.transactions);
+			});
 		}
 
 	}

@@ -1,9 +1,9 @@
 {
-  "name": "my-account",
+  "name": "my-cash",
   "authors": [
     "EricDosReis <ericdosreis.personal@gmail.com>"
   ],
-  "description": "Minha conta, aplicação para gerenciar meus ganhos e custos.",
+  "description": "MyCash, application to manage my earnings and costs.",
   "main": "index.html",
   "keywords": [
     "angularJS",

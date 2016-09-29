@@ -1,0 +1,14 @@
+[
+	{
+		"type": "Depósito",
+		"value": 255.75
+	},
+	{
+		"type": "Saque",
+		"value": 108.50
+	},
+	{
+		"type": "Depósito",
+		"value": 30.00
+	}
+]

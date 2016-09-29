@@ -4,92 +4,132 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Minha Conta</title>
+		<title>Minha Grana</title>
 
-		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="/css/normalize.css">
+		<link rel="stylesheet" href="/css/base.css">
+		<link rel="stylesheet" href="/css/grid.css">
+		<link rel="stylesheet" href="/css/form.css">
+		<link rel="stylesheet" href="/css/card.css">
+		<link rel="stylesheet" href="/css/modifiers.css">
 
-		<script src="lib/angular/angular.js"></script>
-		<script src="lib/angular-locale-pt-br/angular-locale_pt-br.js"></script>
+		<script src="/lib/angular/angular.js"></script>
+		<script src="/lib/angular-locale-pt-br/angular-locale_pt-br.js"></script>
 
-		<script src="js/app.js"></script>
-		<script src="js/controllers/transaction.ctrl.js"></script>
+		<script src="/js/app.js"></script>
+		<script src="/js/controllers/transaction.ctrl.js"></script>
+		<script src="/js/constants/config.const.js"></script>
 	</head>
 
 	<body>
-		<main data-ng-controller="TranscationCtrl as vm">
+		<main class="middle full-width"
+			data-ng-controller="TranscationCtrl as vm">
 
-			<h1>
-				Minha Conta
-			</h1>
+			<section class="card card--light sm-90 md-50 lg-30 center radius" style="height: 500px">
+				<form class="card__form" data-ng-submit="vm.saveTransaction(vm.transaction);">
 
-			<section>
-				<form name="vm.transcationForm"
-					data-ng-submit="vm.saveTransaction(vm.transaction);">
+					<section class="card__header card__header--skew">
+						<div class="card__header--skew__inner">
 
-					<input id="sake" type="radio"
-						data-ng-model="vm.transaction.type"
-						checked
-						value="Saque">
-					<label for="sake">Saque</label>
+							<figure class="card__cover overlay overlay--green radius">
+								<img class="card__cover__image" src="/img/cash.jpg"
+									alt="Imagem ilustrando moedas em cima de uma mesa">
+							</figure>
 
-					<input id="deposit" type="radio"
-						data-ng-model="vm.transaction.type"
-						value="Depósito">
-					<label for="deposit">Depósito</label>
+							<h1 class="card__title">
+								Minha Grana
+							</h1>
 
-					<label for="value">* Valor</label>
-					<input id="value" class="form-control" type="number"
-						required min="1" step="0.01"
-						pattern="[0-9]+([\.,][0-9]+)?"
-						data-ng-model="vm.transaction.value">
+							<div class="card__form__inputs row">
+								<div class="col sm-50">
 
-					<button class="btn btn-primary btn-block">
-						Adicionar
+									<div class="radio radio--white inline-block">
+										<input id="sake" type="radio"
+											data-ng-model="vm.transaction.type"
+											checked
+											value="Saque">
+
+										<label class="text--white" for="sake">Saque</label>
+									</div>
+
+									<div class="radio radio--white inline-block">
+										<input id="deposit" type="radio"
+											data-ng-model="vm.transaction.type"
+											value="Depósito">
+
+										<label class="text--white" for="deposit">Depósito</label>
+									</div>
+								</div>
+
+								<div class="col sm-50">
+									<input id="value" type="number"
+										placeholder="Valor"
+										min="1" step="0.01"
+										pattern="[0-9]+([\.,][0-9]+)?"
+										required
+										data-ng-model="vm.transaction.value">
+								</div>
+							</div>
+
+						</div>
+					</section>
+
+					<button class="button button--blue button--fab card__fab"
+						aria-label="Adicionar transação">
+						+
 					</button>
-
 				</form>
-			</section>
 
-			<section class="jumbotron radius">
-				<input class="form-control" type="search"
-					placeholder="Busca"
-					data-ng-model-options="{ updatedOn: 'default blur', debounce: { default: 250, blur: 0 }}"
-					data-ng-model="searchCriteria">
+			<!-- 	<section class="card__body">
+					<p>
+						Saldo {{ vm.balance | currency : 'R$ ' }}
+					</p>
 
-				<p class="text--center" data-ng-hide="vm.transactions.length">
-					Nenhuma transação
-				</p>
+					<input type="search" placeholder="Busca"
+						data-ng-model-options="{ updatedOn: 'default blur', debounce: { default: 250, blur: 0 }}"
+						data-ng-model="searchCriteria">
 
-				<table class="table" data-ng-show="vm.transactions.length">
-					<thead>
+					<p class="text--center" data-ng-hide="vm.transactions.length">
+						Nenhuma transação
+					</p>
 
-						<tr>
-							<th class="text--center">
-								<a href="" data-ng-click="vm.orderBy('type')">
-									Tipo
-								</a>
-							</th>
+					<table class="table" data-ng-show="vm.transactions.length">
+						<thead>
 
-							<th>
-								<a href="" data-ng-click="vm.orderBy('value')">
-									Valor
-								</a>
-							</th>
+							<tr>
+								<th>
+									<a href="" data-ng-click="vm.orderBy('type')">
+										Tipo
+									</a>
+								</th>
 
-							<th>
-								Ações
-							</th>
-						</tr>
-					</thead>
+								<th class="text--right">
+									<a href="" data-ng-click="vm.orderBy('value')">
+										Valor
+									</a>
+								</th>
 
-					<tbody>
-						<tr data-ng-repeat="transaction in vm.transactions | filter:searchCriteria | orderBy:vm.orderCriteria:vm.orderDirection track by transaction.id">
-							<td>{{ ::transaction.type }}</td>
-							<td>{{ ::transaction.value | currency : 'R$ ' }}</td>
-						</tr>
-					</tbody>
+								<th class="text--right">
+									Ações
+								</th>
+							</tr>
+						</thead>
 
-				</table>
+						<tbody>
+							<tr data-ng-repeat="transaction in vm.transactions | filter:searchCriteria | orderBy:vm.orderCriteria:vm.orderDirection">
+								<td>{{ ::transaction.type }}</td>
+								<td class="text--right">{{ ::transaction.value | currency : 'R$ ' }}</td>
+								<td class="text--right">
+									<a href="" data-ng-click="vm.deleteTransaction(transaction)">
+										Remover
+									</a>
+								</td>
+							</tr>
+						</tbody>
+
+					</table>
+				</section> -->
+
 			</section>
 		</main>
 
