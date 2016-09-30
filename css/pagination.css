@@ -1,0 +1,21 @@
+.pagination {
+	list-style: none;
+	padding: 0;
+	text-align: center;
+}
+
+	.pagination li {
+		display: inline-block;
+		float: none;
+		padding: 0 1em;
+	}
+
+	.pagination a {
+		text-shadow: none;
+		transition: text-shadow 200ms ease-in-out;
+	}
+
+		.pagination a:focus, .pagination a:hover {
+			text-shadow: 0 0 15px rgba(64, 67, 91, 1);
+			transition: text-shadow 200ms ease-in-out;
+		}

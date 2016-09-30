@@ -12,12 +12,19 @@ input {
 	-webkit-tap-highlight-color: transparent;
 }
 
+@font-face {
+	font-family: 'fenton-medium';
+	src: url(/font/fenton-medium.woff) format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 body {
 	background: #BFC7D4;
 	color: #40435B;
 	cursor: auto;
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: 80%;
+	font-family: fenton-medium, 'Helvetica Neue', Arial, sans-serif;
+	font-size: 100%;
 	font-style: normal;
 	font-weight: normal;
 	line-height: 1.5;
@@ -28,6 +35,7 @@ body {
 }
 
 a {
+	color: inherit;
 	text-decoration: none;
 }
 
@@ -90,7 +98,6 @@ table {
 }
 
 tr {
-	border-top: 1px solid #CCC;
 	border-bottom: 1px solid #CCC;
 }
 
@@ -100,25 +107,15 @@ th {
 
 td, th {
 	display: table-cell;
-	padding: 2px 4px;
+	padding: .5em;
 	vertical-align: middle;
 }
 
-/* --------------------------------- */
-/*           Tablet screen           */
-/* --------------------------------- */
 @media screen and (min-width: 768px) {
 
 	body {
 		font-size: 100%;
 	}
-
-}
-
-/* --------------------------------- */
-/*          Desktop screen           */
-/* --------------------------------- */
-@media screen and (min-width: 1024px) {
 
 }
 

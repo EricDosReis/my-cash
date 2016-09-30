@@ -3,18 +3,23 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="theme-color" content="#40435B">
 
 		<title>Minha Grana</title>
+
+		<link rel="shortcut icon" href="/img/favicon.png">
 
 		<link rel="stylesheet" href="/css/normalize.css">
 		<link rel="stylesheet" href="/css/base.css">
 		<link rel="stylesheet" href="/css/grid.css">
 		<link rel="stylesheet" href="/css/form.css">
 		<link rel="stylesheet" href="/css/card.css">
+		<link rel="stylesheet" href="/css/pagination.css">
 		<link rel="stylesheet" href="/css/modifiers.css">
 
 		<script src="/lib/angular/angular.js"></script>
 		<script src="/lib/angular-locale-pt-br/angular-locale_pt-br.js"></script>
+		<script src="/lib/angularUtils-pagination/dirPagination.js"></script>
 
 		<script src="/js/app.js"></script>
 		<script src="/js/controllers/transaction.ctrl.js"></script>
@@ -25,64 +30,62 @@
 		<main class="middle full-width"
 			data-ng-controller="TranscationCtrl as vm">
 
-			<section class="card card--light sm-90 md-50 lg-30 center radius" style="height: 500px">
-				<form class="card__form" data-ng-submit="vm.saveTransaction(vm.transaction);">
+			<section class="card card--light sm-90 md-50 lg-40 center radius">
+				<form data-ng-submit="vm.saveTransaction(vm.transaction);">
 
-					<section class="card__header card__header--skew">
-						<div class="card__header--skew__inner">
+					<section class="card__header card__header--cover">
+						<h1 class="card__title" aria-label="Minha Grana">
+							<img class="sm-60 center"
+								src="/img/minha-grana-logo.svg" alt="Minha grana logo">
+						</h1>
 
-							<figure class="card__cover overlay overlay--green radius">
-								<img class="card__cover__image" src="/img/cash.jpg"
-									alt="Imagem ilustrando moedas em cima de uma mesa">
-							</figure>
+						<div class="row">
+							<div class="col sm-50">
 
-							<h1 class="card__title">
-								Minha Grana
-							</h1>
+								<div class="radio radio--white inline-block">
+									<input id="sake" type="radio"
+										data-ng-model="vm.transaction.type"
+										checked
+										value="Saque">
 
-							<div class="card__form__inputs row">
-								<div class="col sm-50">
-
-									<div class="radio radio--white inline-block">
-										<input id="sake" type="radio"
-											data-ng-model="vm.transaction.type"
-											checked
-											value="Saque">
-
-										<label class="text--white" for="sake">Saque</label>
-									</div>
-
-									<div class="radio radio--white inline-block">
-										<input id="deposit" type="radio"
-											data-ng-model="vm.transaction.type"
-											value="Depósito">
-
-										<label class="text--white" for="deposit">Depósito</label>
-									</div>
+									<label class="text--white" for="sake">Saque</label>
 								</div>
 
-								<div class="col sm-50">
-									<input id="value" type="number"
-										placeholder="Valor"
-										min="1" step="0.01"
-										pattern="[0-9]+([\.,][0-9]+)?"
-										required
-										data-ng-model="vm.transaction.value">
+								<div class="radio radio--white inline-block">
+									<input id="deposit" type="radio"
+										data-ng-model="vm.transaction.type"
+										value="Depósito">
+
+									<label class="text--white" for="deposit">Depósito</label>
 								</div>
 							</div>
 
+							<div class="col sm-50">
+								<input class="input--white" id="value" type="number"
+									placeholder="Valor"
+									min="1"
+									max="{{ vm.transaction.type === 'Saque' ? vm.balance : '' }}"
+									step="0.01"
+									pattern="[0-9]+([\.,][0-9]+)?"
+									required
+									data-ng-model="vm.transaction.value">
+							</div>
 						</div>
-					</section>
 
-					<button class="button button--blue button--fab card__fab"
-						aria-label="Adicionar transação">
-						+
-					</button>
+						<button class="button button--green button--fab card__fab"
+							aria-label="Adicionar transação">
+							<span>+</span>
+						</button>
+
+					</section>
 				</form>
 
-			<!-- 	<section class="card__body">
-					<p>
-						Saldo {{ vm.balance | currency : 'R$ ' }}
+				<section class="card__body">
+					<p class="text--right">
+						Saldo
+						<span class="text--green">
+							{{ vm.balance | currency : 'R$ ' }}
+						</span>
 					</p>
 
 					<input type="search" placeholder="Busca"
@@ -98,14 +101,16 @@
 
 							<tr>
 								<th>
-									<a href="" data-ng-click="vm.orderBy('type')">
+									<a class="link" href="" data-ng-click="vm.orderBy('type')">
 										Tipo
+										<img src="/img/sort-arrows.svg" alt="Ordenar por tipo">
 									</a>
 								</th>
 
 								<th class="text--right">
-									<a href="" data-ng-click="vm.orderBy('value')">
+									<a class="link" href="" data-ng-click="vm.orderBy('value')">
 										Valor
+										<img src="/img/sort-arrows.svg" alt="Ordenar por valor">
 									</a>
 								</th>
 
@@ -116,11 +121,12 @@
 						</thead>
 
 						<tbody>
-							<tr data-ng-repeat="transaction in vm.transactions | filter:searchCriteria | orderBy:vm.orderCriteria:vm.orderDirection">
+							<tr dir-paginate="transaction in vm.transactions | filter:searchCriteria | itemsPerPage:5 | orderBy:vm.orderCriteria:vm.orderDirection">
 								<td>{{ ::transaction.type }}</td>
 								<td class="text--right">{{ ::transaction.value | currency : 'R$ ' }}</td>
 								<td class="text--right">
-									<a href="" data-ng-click="vm.deleteTransaction(transaction)">
+									<a class="text--red link--special" href=""
+										data-ng-click="vm.deleteTransaction(transaction)">
 										Remover
 									</a>
 								</td>
@@ -128,7 +134,13 @@
 						</tbody>
 
 					</table>
-				</section> -->
+
+					<dir-pagination-controls
+						max-size="5"
+						direction-links="true"
+						boundary-links="true">
+					</dir-pagination-controls>
+				</section>
 
 			</section>
 		</main>

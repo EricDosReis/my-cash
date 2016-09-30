@@ -1,63 +1,60 @@
 .card {
+	box-shadow: 0 0 50px rgba(0, 0, 0, .2);
 	margin-top: 1em;
 	margin-bottom: 1em;
 	overflow: hidden;
 	position: relative;
 }
 
-.card__header,
-.card__form,
-.card__title,
-.card__form__inputs {
-	position: relative;
-}
-
-.card__header--skew {
-	-webkit-backface-visibility: hidden;
-	backface-visibility: hidden;
+.card__header {
 	height: 17.5em;
-	overflow: hidden;
+	padding: 0 1.25em;
 	position: relative;
-	-webkit-transform-style: preserve-3d;
-	transform-style: preserve-3d;
-	top: -2.25em;
-	-webkit-transform: skewY(7deg);
-	-ms-transform: skewY(7deg);
-	transform: skewY(7deg)
+	/* Fix Chrome rendering gap in background image */
+	-webkit-box-shadow: inset 0 -10px 3px -3px #EEEEF6;
+	box-shadow: inset 0 -10px 3px -3px #EEEEF6;
+
 }
 
-.card__header--skew__inner {
-	height: 17.5em;
-	-webkit-transform: skewY(-7deg);
-	-ms-transform: skewY(-7deg);
-	transform: skewY(-7deg)
+.card__header--cover {
+	background-image: url(/img/header-separator.svg), url(/img/cash.jpg);
+	background-repeat: no-repeat, no-repeat;
+	background-size: 105% auto, cover;
+	background-position: bottom center, top left;
 }
 
-.card__cover {
-	overflow: hidden;
-	position: absolute;
-	top: 0;
-	bottom: 0;
+.card__title {
+	float: left;
 	width: 100%;
-	z-index: 0;
 }
-
-	.card__cover .card__cover__image {
-		min-height: 100%;
-		width: 100%;
-	}
 
 .card__fab {
 	position: absolute;
-	bottom: -1.5em;
-	right: 2em;
+	bottom: -7%;
+	right: 2.25em;
 }
 
 .card__body {
-	padding: 1em;
+	padding: 0 1em 1em 1em;
 }
 
 .card--light {
 	background-color: #EEEEF6;
 	box-shadow: 0 0 30 rgba(0, 0, 0, .3);
+}
+
+@media screen and (min-width: 600px) {
+
+	.card__fab {
+		bottom: 2.5%;
+	}
+
+}
+
+@media screen and (min-width: 768px) {
+
+	.card__fab {
+		bottom: -1%;
+	}
+
 }

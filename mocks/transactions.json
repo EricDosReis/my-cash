@@ -10,5 +10,9 @@
 	{
 		"type": "Depósito",
 		"value": 30.00
+	},
+	{
+		"type": "Saque",
+		"value": 40.00
 	}
 ]

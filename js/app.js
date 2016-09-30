@@ -2,6 +2,6 @@
 	'use strict';
 
 	angular
-		.module('MyCash', []);
+		.module('MyCash', ['angularUtils.directives.dirPagination']);
 
 })();

@@ -43,7 +43,7 @@
 		function calculateBalance(transactions) {
 			var balance = 0;
 
-			transactions.forEach((item) => {
+			transactions.forEach(function(item) {
 				if (item.type === 'Saque')
 					balance -= item.value;
 
