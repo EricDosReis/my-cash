@@ -1,14 +1,14 @@
 # Running instructions
 
-First clone this repository.
+**Prerequisites**: nodeJS and bower installed.
 
-Install dependencies
+First clone this repository and install dependencies:
 
 ```shell
 bower install
 ```
 
-Run the server
+Run the server:
 
 ```shell
 http-server -p 3000
