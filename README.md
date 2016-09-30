@@ -12,6 +12,7 @@ bower install
 ```shell
 http-server -p 4000
 
-[link text itself]: http://localhost:4000
+That's all folks!
 
-enjoy!
+[Click here to see in your browser]: http://localhost:4000
+
