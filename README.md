@@ -1,14 +1,14 @@
 # Running instructions
 
-1. First clone this repository.
+First clone this repository.
 
-2. Install dependencies
+Install dependencies
 
 ```shell
 bower install
 ```
 
-3. Run the server
+Run the server
 
 ```shell
 http-server -p 3000
