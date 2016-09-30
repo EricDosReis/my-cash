@@ -14,6 +14,6 @@ bower install
 http-server -p 4000
 ```
 
-[Click here to see in your browser]: http://localhost:4000
+Access in your browser [http://localhost:4000](http://localhost:4000)
 
 That's all folks!
