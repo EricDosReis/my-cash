@@ -38,6 +38,8 @@
 		function init() {
 			vm.transaction      = {};
 			vm.transaction.type = 'Saque';
+
+			vm.filterBy   = '';
 		}
 
 		function calculateBalance(transactions) {

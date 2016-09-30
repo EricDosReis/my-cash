@@ -88,9 +88,30 @@
 						</span>
 					</p>
 
-					<input type="search" placeholder="Busca"
-						data-ng-model-options="{ updatedOn: 'default blur', debounce: { default: 250, blur: 0 }}"
-						data-ng-model="searchCriteria">
+					<div class="radio inline-block">
+						<input id="filterAll" type="radio"
+							data-ng-model="vm.filterBy"
+							checked
+							value="">
+
+						<label for="filterAll">Todos</label>
+					</div>
+
+					<div class="radio inline-block">
+						<input id="filterBySake" type="radio"
+							data-ng-model="vm.filterBy"
+							value="Saque">
+
+						<label for="filterBySake">Saque</label>
+					</div>
+
+					<div class="radio inline-block">
+						<input id="filterByDeposit" type="radio"
+							data-ng-model="vm.filterBy"
+							value="Depósito">
+
+						<label for="filterByDeposit">Depósito</label>
+					</div>
 
 					<p class="text--center" data-ng-hide="vm.transactions.length">
 						Nenhuma transação
@@ -121,7 +142,7 @@
 						</thead>
 
 						<tbody>
-							<tr dir-paginate="transaction in vm.transactions | filter:searchCriteria | itemsPerPage:5 | orderBy:vm.orderCriteria:vm.orderDirection">
+							<tr dir-paginate="transaction in vm.transactions | filter:vm.filterBy | itemsPerPage:5 | orderBy:vm.orderCriteria:vm.orderDirection">
 								<td>{{ ::transaction.type }}</td>
 								<td class="text--right">{{ ::transaction.value | currency : 'R$ ' }}</td>
 								<td class="text--right">
