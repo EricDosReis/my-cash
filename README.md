@@ -6,13 +6,14 @@
 
 ```shell
 bower install
+```
 
 3. Run the server
 
 ```shell
 http-server -p 4000
-
-That's all folks!
+```
 
 [Click here to see in your browser]: http://localhost:4000
 
+That's all folks!
