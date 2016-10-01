@@ -28,7 +28,7 @@
 
 	<body>
 		<main class="middle full-width"
-			data-ng-controller="TranscationCtrl as vm">
+			data-ng-controller="TransactionCtrl as vm">
 
 			<section class="card card--light sm-90 md-50 lg-40 center radius">
 				<form data-ng-submit="vm.saveTransaction(vm.transaction);">
@@ -142,7 +142,7 @@
 						</thead>
 
 						<tbody>
-							<tr dir-paginate="transaction in vm.transactions | filter:vm.filterBy | itemsPerPage:5 | orderBy:vm.orderCriteria:vm.orderDirection">
+							<tr data-dir-paginate="transaction in vm.transactions | filter:vm.filterBy | itemsPerPage:5 | orderBy:vm.orderCriteria:vm.orderDirection">
 								<td>{{ ::transaction.type }}</td>
 								<td class="text--right">{{ ::transaction.value | currency : 'R$ ' }}</td>
 								<td class="text--right">
@@ -157,9 +157,9 @@
 					</table>
 
 					<dir-pagination-controls
-						max-size="5"
-						direction-links="true"
-						boundary-links="true">
+						data-max-size="5"
+						data-direction-links="true"
+						data-boundary-links="true">
 					</dir-pagination-controls>
 				</section>
 

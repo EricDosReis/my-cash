@@ -3,11 +3,11 @@
 
 	angular
 		.module('MyCash')
-		.controller('TranscationCtrl', TranscationCtrl);
+		.controller('TransactionCtrl', TransactionCtrl);
 
-	TranscationCtrl.$inject = ['$http', 'config'];
+	TransactionCtrl.$inject = ['$http', 'config'];
 
-	function TranscationCtrl($http, config) {
+	function TransactionCtrl($http, config) {
 
 		var vm = this;
 
