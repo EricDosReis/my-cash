@@ -8,9 +8,11 @@ First clone this repository and install dependencies:
 bower install
 ```
 
-Run the server:
+Install and run server:
 
 ```shell
+npm i http-server -g
+
 http-server -p 3000
 ```
 
