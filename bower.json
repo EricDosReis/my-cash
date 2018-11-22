@@ -3,7 +3,7 @@
   "authors": [
     "EricDosReis <ericdosreis.personal@gmail.com>"
   ],
-  "description": "MyCash, application to manage my earnings and costs.",
+  "description": "MyCash, simple app to manage expenses.",
   "main": "index.html",
   "keywords": [
     "angularJS",
